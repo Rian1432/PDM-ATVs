@@ -30,7 +30,7 @@ export default function Edit() {
   
     return (
         <View style={globalStyles.pageContainer}>
-            <Stack.Screen options={{ title: "Editar jogo" }}/>
+            <Stack.Screen options={{ title: "Editar" }}/>
 
             <GameForm onSubmit={handleEdit} isLoading={loading} game={data} />
         </View>

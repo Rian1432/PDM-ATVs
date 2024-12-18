@@ -8,12 +8,13 @@ import ImageButton from '@/components/shared/ImageButton'
 import Loading from '@/components/shared/Loading'
 import useAuth from '@/firebase/hooks/useAuth'
 import { THEME_COLORS } from '../constants/GlobalStyles'
+import { Ionicons } from '@expo/vector-icons'
 
 export default function login() {
     const { user, login, loading } = useAuth();
 
-    const [username, onChangeUserName] = useState('example@email.com')
-    const [password, onChangePassword] = useState('123456')
+    const [username, onChangeUserName] = useState('')
+    const [password, onChangePassword] = useState('')
     const [errorMessage, setError] = useState('')
 
     useEffect(() => {
@@ -37,8 +38,8 @@ export default function login() {
       } catch (error:any) {
         Alert.alert("Error", error.toString())
         setError('Usuário ou senha inválidos')
-      }
     }
+}
 
     return (
         <FullScreen center>
@@ -74,6 +75,21 @@ export default function login() {
                     handlePress={handleSubmit} 
                 />
             </View>
+
+            <View style={styles.helpContainer}>
+                <Text style={styles.helpText}>Esqueceu a senha?</Text>
+                <Text style={styles.helpText}>Dica:</Text>
+                <Text style={styles.helpText}>email: example@email.com</Text>
+                <Text style={styles.helpText}>Senha: 123456</Text>
+            </View>
+
+            <View style={{position: 'absolute', bottom: -130, right: -50, transform: [{rotate: '45deg'}], opacity: 0.3}}>
+                <Ionicons name="game-controller" size={330} color={THEME_COLORS.DARK_GRAY_COLOR} />
+            </View>
+
+            <View style={{position: 'absolute', top: -120, left: -150, transform: [{rotate: '-45deg'}], opacity: 0.3}}>
+                <Ionicons name="game-controller" size={330} color={THEME_COLORS.DARK_GRAY_COLOR} />
+            </View>
         </FullScreen>
     )
 }
@@ -82,6 +98,8 @@ const styles = StyleSheet.create({
     formContainer: {
         flexDirection: 'column',
         gap: 15,
+        position: 'relative',
+        zIndex: 1,
     },
     welcomeText: {
         color: THEME_COLORS.GRAY_COLOR,
@@ -109,7 +127,9 @@ const styles = StyleSheet.create({
         fontWeight: '500',
     },
     helpContainer: {
-        marginTop: 30,
+        marginTop: 10,
+        alignItems: 'center',
+        opacity: 0.5,
     },
     helpText: {
         color: THEME_COLORS.GRAY_COLOR,
