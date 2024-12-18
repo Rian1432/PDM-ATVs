@@ -1,10 +1,10 @@
-import { View, Text, ActivityIndicator } from 'react-native'
+import { View, ActivityIndicator, ActivityIndicatorProps } from 'react-native'
 import React from 'react'
 
-export default function Loading() {
+export default function Loading({...props}: ActivityIndicatorProps) {
   return (
     <View>
-      <ActivityIndicator />
+      <ActivityIndicator {...props} />
     </View>
   )
 }

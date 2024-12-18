@@ -1,43 +1,33 @@
 import { Stack, router } from 'expo-router'
-import { View, Text, FlatList, Button, Alert, StyleSheet } from 'react-native'
+import { View, FlatList, Alert, StyleSheet } from 'react-native'
 import React from 'react'
 
-import Loading from '@/components/shared/Loading'
-import HeaderRight from '@/components/headers/HeaderRight'
-import globalStyles, { THEME_COLORS } from '@/constants/GlobalStyles'
+import globalStyles from '@/constants/GlobalStyles'
 import useCollection from '@/firebase/hooks/useCollection'
 import Game from '@/types/Game'
 import GameView from '@/components/games/GameView'
 import StyledButton from '@/components/shared/StyledButton'
+import LoadableContainer from '@/components/containers/LoadableContainer'
 
 export default function index() {
   const { data, count, remove, refreshData, loading } = useCollection<Game>("game-list");
 
-  // if (loading) return <Loading />
-
   return (
     <View style={globalStyles.pageContainer}>
-        <Stack.Screen
-          options={{
-            title: "Home",
-            headerRight: () => <HeaderRight />,
-          }}
-        />
+        <Stack.Screen options={{ title: "Home" }} />
 
         {/* <Text style={globalStyles.title}>Lista de desejos {count}</Text> */}
 
-        <View style={style.buttonContainer}>
-          <StyledButton 
-            title='Adicionar Jogo'
-            style={{ width: 150}}
-            onPress={ () => router.replace('/home/create')}
-          />
-        </View>
+        <LoadableContainer isLoading={loading}>
+          <View style={style.buttonContainer}>
+            <StyledButton 
+              title='Adicionar Jogo'
+              style={{ width: 150}}
+              onPress={ () => router.replace('/home/create')}
+            />
+          </View>
 
-        {loading 
-          ? ( <Loading /> ) 
-          : (
-            <FlatList
+          <FlatList
             data={data}
             renderItem={({ item }) => (
               <GameView 
@@ -56,8 +46,7 @@ export default function index() {
             )}
             style={{ width: "100%", marginTop: 20 }}
           />
-        )}
-
+        </LoadableContainer>
     </View>
   )
 }

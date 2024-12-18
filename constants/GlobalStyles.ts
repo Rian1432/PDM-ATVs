@@ -1,7 +1,9 @@
 export enum THEME_COLORS {
-    BASE_COLOR = '#FFFFFF',
+    BASE_COLOR = '#272834',
+    TEXT_COLOR = '#F4FAFF',
     GRAY_COLOR = '#B4BEC9',
-    PRIMARY_COLOR = '#159A9C',
+    DARK_GRAY_COLOR = '#3D404B',
+    PRIMARY_COLOR = '#197BD1',
     SECONDARY_COLOR = '#002333',
     ERROR_COLOR = '#e8593c',
 }
@@ -32,11 +34,13 @@ const globalStyles = StyleSheet.create({
   pageContainer: {
     flex: 1,
     padding: DEFAULT_SPACES.DEFAULT_PADDING,
+    backgroundColor: THEME_COLORS.BASE_COLOR,
   },
   title: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginVertical: 4,
+    fontSize: 20,
+    marginBottom: 20,
+    textAlign: 'center',
+    color: THEME_COLORS.TEXT_COLOR,
   },
   input: {
     height: 32,

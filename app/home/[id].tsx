@@ -2,7 +2,6 @@ import { View, Alert } from 'react-native'
 import { Stack, router, useLocalSearchParams } from 'expo-router'
 import React from 'react'
 
-import HeaderRight from '@/components/headers/HeaderRight'
 import GameForm from '@/components/games/GameForm'
 import useCollection from '@/firebase/hooks/useCollection'
 import Game from '@/types/Game'
@@ -31,12 +30,7 @@ export default function Edit() {
   
     return (
         <View style={globalStyles.pageContainer}>
-            <Stack.Screen
-                options={{
-                    title: "Editar jogo",
-                    headerRight: () => <HeaderRight />,
-                }}
-            />
+            <Stack.Screen options={{ title: "Editar jogo" }}/>
 
             <GameForm onSubmit={handleEdit} isLoading={loading} game={data} />
         </View>

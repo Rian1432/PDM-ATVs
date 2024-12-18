@@ -40,8 +40,6 @@ export default function login() {
       }
     }
 
-    if (loading) return <Loading />;
-
     return (
         <FullScreen center>
             <View style={styles.formContainer}>
@@ -72,6 +70,7 @@ export default function login() {
                 <ImageButton
                     title='Entrar'
                     customStyle={{backgroundColor: THEME_COLORS.PRIMARY_COLOR}} 
+                    loading={loading}
                     handlePress={handleSubmit} 
                 />
             </View>
@@ -97,6 +96,7 @@ const styles = StyleSheet.create({
         fontSize: 30,
         textAlign: 'left',
         marginBottom: 20,
+        color: THEME_COLORS.TEXT_COLOR,
     },
     inputGroup: {
         flexDirection: 'column',

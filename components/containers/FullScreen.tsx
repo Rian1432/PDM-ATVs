@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { StyleSheet, View } from "react-native";
-import { DEFAULT_SPACES } from "../../constants/GlobalStyles";
+import { DEFAULT_SPACES, THEME_COLORS } from "../../constants/GlobalStyles";
 
 type FullScreenProps = {
   children: ReactNode;
@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: DEFAULT_SPACES.DEFAULT_PADDING,
     gap: DEFAULT_SPACES.DEFAULT_GAP * 2,
+    backgroundColor: THEME_COLORS.BASE_COLOR,
   },
   center: {
     justifyContent: "center",

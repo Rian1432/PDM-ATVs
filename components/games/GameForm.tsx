@@ -4,9 +4,10 @@ import React, { useEffect, useState } from 'react'
 import { router } from 'expo-router'
 
 import CustomInput from '../shared/CustomInput'
-import CustomMultiselect from '../shared/CustomMultiselect'
 import StyledButton from '../shared/StyledButton'
 import Game from '@/types/Game'
+import MultiSelectComponent from '../shared/ReactPiker';
+import globalStyles, { THEME_COLORS } from '@/constants/GlobalStyles';
 
 type GameFormProps = {
   onSubmit: (form:Game) => void
@@ -56,7 +57,7 @@ export default function GameForm({onSubmit, isLoading, game}: GameFormProps) {
 
   return (
     <View style={style.form}>
-      <Text style={style.title}>{game ? 'Editar Jogo' : 'Adicionar Jogo'}</Text>
+      <Text style={globalStyles.title}>{game ? 'Editar Jogo' : 'Adicionar Jogo'}</Text>
  
       <CustomInput 
         placeholder="Nome"
@@ -75,29 +76,20 @@ export default function GameForm({onSubmit, isLoading, game}: GameFormProps) {
         minValue={0}
       />
 
-      {/* <CustomMultiselect /> */}
-
-      {/* <View style={{ height: 100, width: '100%' }}>
-        <SectionedMultiSelect
-          items={items} 
-          uniqueKey='id'
-          selectText='Choose some things...'
-          showDropDowns={true}
-          onSelectedItemsChange={onSelectedItemsChange}
-          selectedItems={category}
-        />
-      </View> */}
+      {/* <MultiSelectComponent /> */}
 
       <View style={style.buttonContainer}>
-        <StyledButton 
-          title="Voltar" 
-          onPress={() => router.replace('/home')} 
+        <StyledButton
+          style={{backgroundColor: THEME_COLORS.PRIMARY_COLOR, borderWidth: 1, borderColor: THEME_COLORS.PRIMARY_COLOR, width: 250, padding: 10}}
+          title={game ? 'Editar' : 'Criar'}
+          onPress={() => onSubmit({name, value, category: ['teste']})} 
           disabled={isLoading} 
         />
 
         <StyledButton 
-          title={game ? 'Editar' : 'Criar'}
-          onPress={() => onSubmit({name, value, category: ['teste']})} 
+          style={{backgroundColor: THEME_COLORS.BASE_COLOR, borderWidth: 1, borderColor: THEME_COLORS.PRIMARY_COLOR, width: 250}}
+          title="Voltar" 
+          onPress={() => router.replace('/home')} 
           disabled={isLoading} 
         />
       </View>
@@ -114,17 +106,17 @@ const style = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  title: {
-    fontSize: 20,
-    marginBottom: 20,
-    textAlign: 'center'
-  },
   buttonContainer: {
-    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     gap: 10,
-    width: 100,
-    marginTop: 20
+    width: 250,
+    marginTop: 20,
+  },
+  button: {
+    padding: 10,
+    borderRadius: 5,
+    width: 250,
+    alignItems: 'center'
   }
 })

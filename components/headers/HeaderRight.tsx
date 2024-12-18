@@ -22,8 +22,8 @@ export default function HeaderRight() {
           }
         }}
       >
-        <Text>Sair</Text>
-        <Ionicons name="exit-outline" size={24} color="black" />
+        <Text style={style.buttonText}>Sair</Text>
+        <Ionicons name="exit-outline" size={24} color={THEME_COLORS.TEXT_COLOR} />
       </TouchableOpacity>
     </View>
   );
@@ -36,4 +36,7 @@ const style = StyleSheet.create({
     alignItems: "center",
     gap: 5,
   },
+  buttonText: {
+    color: THEME_COLORS.TEXT_COLOR,
+  }
 });

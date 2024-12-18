@@ -3,9 +3,8 @@ import { Stack, router } from 'expo-router';
 import React from 'react'
 
 import GameForm from '@/components/games/GameForm';
-import HeaderRight from '@/components/headers/HeaderRight';
 import useCollection from '@/firebase/hooks/useCollection';
-import globalStyles from '@/constants/GlobalStyles';
+import globalStyles, { THEME_COLORS } from '@/constants/GlobalStyles';
 import Game from '@/types/Game';
 
 export default function create() {
@@ -25,12 +24,8 @@ export default function create() {
 
     return (
         <View style={globalStyles.pageContainer}>
-            <Stack.Screen
-                options={{
-                    title: "Adicionar",
-                    headerRight: () => <HeaderRight />,
-                }}
-            />
+            <Stack.Screen options={{ title: "Adicionar" }}/>
+
             <GameForm onSubmit={handleCreate} isLoading={loading} />
         </View>
     )

@@ -41,18 +41,21 @@ const styles = StyleSheet.create({
     inputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        borderBottomWidth: 1,
-        borderColor: THEME_COLORS.GRAY_COLOR,
+        borderWidth: 2,
+        borderRadius: 8,
+        borderColor: THEME_COLORS.DARK_GRAY_COLOR,
+        backgroundColor: THEME_COLORS.DARK_GRAY_COLOR,
         paddingHorizontal: 10,
         paddingVertical: 5,
         outlineWidth: 0,
         gap: 10,
     },
     input: {
-        width: 230,
+        width: 250,
         outlineWidth: 0,
+        color: THEME_COLORS.TEXT_COLOR,
     },
     inputFocused: {
-        borderBottomColor: THEME_COLORS.PRIMARY_COLOR,
+        borderColor: THEME_COLORS.PRIMARY_COLOR,
     },
 });
