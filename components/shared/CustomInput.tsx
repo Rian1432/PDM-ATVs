@@ -1,10 +1,10 @@
-import { View, Text, TextInput, StyleSheet, TextInputProps } from 'react-native'
+import { View, Text, TextInput, StyleSheet, TextInputProps, ColorValue } from 'react-native'
 import React, { useState } from 'react'
 import { THEME_COLORS } from '../../constants/GlobalStyles';
 import { Ionicons } from '@expo/vector-icons';
 
-interface CustomTextInputProps extends TextInputProps {
-    placeholderTextColor?: string;
+export type CustomTextInputProps = TextInputProps & {
+    placeholderTextColor?: ColorValue;
     icon?: string;
 }
 
@@ -27,6 +27,7 @@ export default function CustomInput({ placeholderTextColor = '#888', icon, ...pr
 
             <TextInput 
                 style={[styles.input, isFocused && styles.inputFocused]}
+                keyboardType={props.keyboardType ? props.keyboardType : 'default'}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
                 placeholderTextColor={THEME_COLORS.GRAY_COLOR}
@@ -42,7 +43,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderBottomWidth: 1,
         borderColor: THEME_COLORS.GRAY_COLOR,
-        padding: 10,
+        paddingHorizontal: 10,
+        paddingVertical: 5,
         outlineWidth: 0,
         gap: 10,
     },

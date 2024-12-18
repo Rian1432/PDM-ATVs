@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Alert, Image, StyleSheet, Text, View } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { router } from 'expo-router'
 
@@ -12,8 +12,8 @@ import { THEME_COLORS } from '../constants/GlobalStyles'
 export default function login() {
     const { user, login, loading } = useAuth();
 
-    const [username, onChangeUserName] = useState('')
-    const [password, onChangePassword] = useState('')
+    const [username, onChangeUserName] = useState('example@email.com')
+    const [password, onChangePassword] = useState('123456')
     const [errorMessage, setError] = useState('')
 
     useEffect(() => {
@@ -35,7 +35,8 @@ export default function login() {
         await login(username, password)
         router.navigate('/home')
       } catch (error:any) {
-        setError(error)
+        Alert.alert("Error", error.toString())
+        setError('Usuário ou senha inválidos')
       }
     }
 

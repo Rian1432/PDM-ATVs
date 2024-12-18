@@ -51,7 +51,7 @@ const globalStyles = StyleSheet.create({
     height: 32,
     paddingVertical: 4,
     paddingHorizontal: 8,
-    backgroundColor: "darkblue",
+    backgroundColor: THEME_COLORS.PRIMARY_COLOR,
     borderRadius: theme.defaultRadius,
     width: "100%",
   },
