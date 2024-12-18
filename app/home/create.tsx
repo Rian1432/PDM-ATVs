@@ -1,4 +1,4 @@
-import { View, Alert } from 'react-native'
+import { View, Alert, StatusBar } from 'react-native'
 import { Stack, router } from 'expo-router';
 import React from 'react'
 
@@ -25,6 +25,11 @@ export default function create() {
     return (
         <View style={globalStyles.pageContainer}>
             <Stack.Screen options={{ title: "Adicionar" }}/>
+            <StatusBar
+                backgroundColor={THEME_COLORS.DARK_GRAY_COLOR}
+                translucent={true}
+                hidden={false}
+            />
 
             <GameForm onSubmit={handleCreate} isLoading={loading} />
         </View>

@@ -1,8 +1,8 @@
 import { Stack, router } from 'expo-router'
-import { View, FlatList, Alert, StyleSheet, Text } from 'react-native'
+import { View, FlatList, Alert, StyleSheet, Text, StatusBar } from 'react-native'
 import React from 'react'
 
-import globalStyles from '@/constants/GlobalStyles'
+import globalStyles, { THEME_COLORS } from '@/constants/GlobalStyles'
 import useCollection from '@/firebase/hooks/useCollection'
 import Game from '@/types/Game'
 import GameView from '@/components/games/GameView'
@@ -15,6 +15,11 @@ export default function index() {
   return (
     <View style={globalStyles.pageContainer}>
         <Stack.Screen options={{ title: "Home" }} />
+        <StatusBar
+          backgroundColor={THEME_COLORS.DARK_GRAY_COLOR}
+          translucent={true}
+          hidden={false}
+        />
 
         <Text style={globalStyles.title}>Lista de jogos desejados</Text>
 

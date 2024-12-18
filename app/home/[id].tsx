@@ -1,11 +1,11 @@
-import { View, Alert } from 'react-native'
+import { View, Alert, StatusBar } from 'react-native'
 import { Stack, router, useLocalSearchParams } from 'expo-router'
 import React from 'react'
 
 import GameForm from '@/components/games/GameForm'
 import useCollection from '@/firebase/hooks/useCollection'
 import Game from '@/types/Game'
-import globalStyles from '@/constants/GlobalStyles'
+import globalStyles, { THEME_COLORS } from '@/constants/GlobalStyles'
 import useDocument from '@/firebase/hooks/useDocument'
 import Loading from '@/components/shared/Loading'
 
@@ -25,14 +25,21 @@ export default function Edit() {
             Alert.alert("Error", error.toString())
         }
     }
-
-    if (loadingData) return <Loading />;
   
     return (
         <View style={globalStyles.pageContainer}>
             <Stack.Screen options={{ title: "Editar" }}/>
+            <StatusBar
+                backgroundColor={THEME_COLORS.DARK_GRAY_COLOR}
+                translucent={true}
+                hidden={false}
+            />
 
-            <GameForm onSubmit={handleEdit} isLoading={loading} game={data} />
+            {
+                loadingData 
+                ? <Loading /> 
+                : <GameForm onSubmit={handleEdit} isLoading={loading} game={data} />
+            }
         </View>
     )
 }

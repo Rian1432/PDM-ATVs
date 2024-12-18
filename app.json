@@ -11,10 +11,6 @@
     "ios": {
       "supportsTablet": true
     },
-    "androidStatusBar": {
-      "backgroundColor": "#3D404B",
-      "translucent": false
-    },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",

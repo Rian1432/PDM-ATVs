@@ -1,5 +1,6 @@
-import { Alert, Image, StyleSheet, Text, View } from 'react-native'
+import { Alert, Image, StatusBar, StyleSheet, Text, View } from 'react-native'
 import React, { useState, useEffect } from 'react'
+import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
 
 import FullScreen from '../components/containers/FullScreen'
@@ -8,7 +9,6 @@ import ImageButton from '@/components/shared/ImageButton'
 import Loading from '@/components/shared/Loading'
 import useAuth from '@/firebase/hooks/useAuth'
 import { THEME_COLORS } from '../constants/GlobalStyles'
-import { Ionicons } from '@expo/vector-icons'
 
 export default function login() {
     const { user, login, loading } = useAuth();
@@ -43,6 +43,12 @@ export default function login() {
 
     return (
         <FullScreen center>
+            <StatusBar 
+                backgroundColor={THEME_COLORS.BASE_COLOR}
+                translucent={true}
+                hidden={false}
+            />
+
             <View style={styles.formContainer}>
                 <Text style={styles.welcomeText}>Bem-vindo!</Text>
                 <Text style={styles.title}>login</Text>
