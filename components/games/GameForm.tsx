@@ -4,9 +4,9 @@ import React, { useEffect, useState } from 'react'
 import { router } from 'expo-router'
 
 import CustomInput from '../shared/CustomInput'
+import CustomMultiselect from '../shared/CustomMultiselect'
 import StyledButton from '../shared/StyledButton'
 import Game from '@/types/Game'
-import MultiSelectComponent from '../shared/ReactPiker';
 import globalStyles, { THEME_COLORS } from '@/constants/GlobalStyles';
 
 type GameFormProps = {
@@ -20,40 +20,23 @@ export default function GameForm({onSubmit, isLoading, game}: GameFormProps) {
   const [value, setValue] = useState<number|null>(null)
   const [category, setCategory] = useState<any[]>([])
 
-  const items = [
-    {
-      name: "Apple",
-      id: 10,
-    },{
-      name: "Strawberry",
-      id: 17,
-    },{
-      name: "Pineapple",
-      id: 13,
-    },{
-      name: "Banana",
-      id: 14,
-    },{
-      name: "Watermelon",
-      id: 15,
-    },{
-      name: "Kiwi fruit",
-      id: 16,
-    }
-  ]
-
-
-  const onSelectedItemsChange = (selectedItems:any) => {
-    Alert.alert('Selected Items', selectedItems)
-    setCategory([ ...selectedItems ]);
-  }
-
   useEffect(() => {
     if(game) {
       setName(game.name)
       setValue(game.value)
+      setCategory([...game.category])
     }
   }, [])
+
+  const toggleSelection = (itemName:string) => {
+    setCategory((prevSelectedItems:any) => {
+      if (prevSelectedItems.includes(itemName)) {
+        return prevSelectedItems.filter((name:string) => name !== itemName);
+      } else {
+        return [...prevSelectedItems, itemName];
+      }
+    });
+  };
 
   return (
     <View style={style.form}>
@@ -76,13 +59,16 @@ export default function GameForm({onSubmit, isLoading, game}: GameFormProps) {
         minValue={0}
       />
 
-      {/* <MultiSelectComponent /> */}
+      <CustomMultiselect 
+        selectedItems={category}
+        toggleSelection={toggleSelection} 
+      />
 
       <View style={style.buttonContainer}>
         <StyledButton
           style={{backgroundColor: THEME_COLORS.PRIMARY_COLOR, borderWidth: 1, borderColor: THEME_COLORS.PRIMARY_COLOR, width: 250, padding: 10}}
           title={game ? 'Editar' : 'Criar'}
-          onPress={() => onSubmit({name, value, category: ['teste']})} 
+          onPress={() => onSubmit({name, value, category})} 
           disabled={isLoading} 
         />
 

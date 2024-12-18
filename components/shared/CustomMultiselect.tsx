@@ -1,3 +1,5 @@
+import { THEME_COLORS } from '@/constants/GlobalStyles';
+import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 
@@ -13,35 +15,28 @@ const items = [
   { id: '9', name: 'História' },
 ];
 
-export default function MultiSelect () {
-  const [selectedItems, setSelectedItems] = useState([]);
+type MultiSelectProps = {
+  selectedItems: string[];
+  toggleSelection: (itemName: string) => void;
+}
 
-  const toggleSelection = (itemId:string) => {
-    setSelectedItems((prevSelectedItems:any) => {
-      if (prevSelectedItems.includes(itemId)) {
-        return prevSelectedItems.filter((id:any) => id !== itemId);
-      } else {
-        return [...prevSelectedItems, itemId];
-      }
-    });
-  };
-
+export default function MultiSelect ({selectedItems, toggleSelection}: MultiSelectProps) {
   const renderItem = ({ item }:any) => {
-    const isSelected = selectedItems.includes(item.id);
+    const isSelected = selectedItems.includes(item.name);
     return (
       <TouchableOpacity
         style={[styles.item, isSelected && styles.selectedItem]}
-        onPress={() => toggleSelection(item.id)}
+        onPress={() => toggleSelection(item.name)}
       >
         <Text style={styles.itemText}>{item.name}</Text>
-        {isSelected && <Text style={styles.checkmark}>✓</Text>}
+        {isSelected && <Ionicons name="close-circle" color={THEME_COLORS.PRIMARY_COLOR} size={20} />}
       </TouchableOpacity>
     );
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>MultiSelect</Text>
+      <Text style={styles.title}>Selecione as categorias:</Text>
       <FlatList
         data={items}
         renderItem={renderItem}
@@ -54,8 +49,9 @@ export default function MultiSelect () {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: 230,
-    maxHeight: 200,
+    maxHeight: 150,
+    width: 270,
+    marginTop: 10,
   },
   title: {
     fontSize: 16,
@@ -65,17 +61,21 @@ const styles = StyleSheet.create({
   item: {
     padding: 10,
     marginVertical: 5,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: THEME_COLORS.DARK_GRAY_COLOR,
     borderRadius: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    width: 270,
+    borderWidth: 1,
+    borderColor: THEME_COLORS.DARK_GRAY_COLOR,
   },
   selectedItem: {
-    backgroundColor: '#cce5ff',
+    borderColor: THEME_COLORS.PRIMARY_COLOR,
   },
   itemText: {
     fontSize: 14,
+    color: THEME_COLORS.GRAY_COLOR,
   },
   checkmark: {
     fontSize: 18,

@@ -1,7 +1,7 @@
-import { View, Text, Button, StyleSheet, Alert, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native'
 import { formatNumber } from 'react-native-currency-input';
 import Feather from '@expo/vector-icons/Feather';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { router } from 'expo-router'
 import React from 'react'
 
@@ -21,6 +21,7 @@ const formattedValue = (value:number) => formatNumber(value, {
   delimiter: '.',
 });
 
+
 export default function GameView({game, onDelete}: GameViewProps) {
   return (
     <Card>
@@ -34,7 +35,13 @@ export default function GameView({game, onDelete}: GameViewProps) {
                 <Feather name="edit" size={14} color={THEME_COLORS.TEXT_COLOR} />
               </TouchableOpacity>
 
-              <Text style={style.gameText}>{formattedValue(game.value)}</Text>
+              <Text style={style.gameText}>{formattedValue(game.value!)}</Text>
+
+              <View style={style.categoriesContainer}>
+                {game.category.map((element, index) => (
+                  <Text style={style.badge} key={index}>{element}</Text>
+                ))}
+              </View>
           </View>
 
 
@@ -105,5 +112,22 @@ const style = StyleSheet.create({
     borderLeftColor: 'gray',
     height: '100%',
     padding: 10,
+  },
+  badge: {
+    backgroundColor: THEME_COLORS.DARK_GRAY_COLOR,
+    color: THEME_COLORS.PRIMARY_COLOR,
+    fontSize: 12,
+    borderWidth: 1,
+    borderColor: THEME_COLORS.PRIMARY_COLOR,
+    paddingHorizontal: 5,
+    paddingVertical: 2,
+    borderRadius: 5,
+  },
+  categoriesContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 5,
+    marginTop: 10,
+    maxWidth: 300,
   }
 })

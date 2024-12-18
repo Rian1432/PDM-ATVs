@@ -1,5 +1,5 @@
 import { Stack, router } from 'expo-router'
-import { View, FlatList, Alert, StyleSheet } from 'react-native'
+import { View, FlatList, Alert, StyleSheet, Text } from 'react-native'
 import React from 'react'
 
 import globalStyles from '@/constants/GlobalStyles'
@@ -16,7 +16,7 @@ export default function index() {
     <View style={globalStyles.pageContainer}>
         <Stack.Screen options={{ title: "Home" }} />
 
-        {/* <Text style={globalStyles.title}>Lista de desejos {count}</Text> */}
+        <Text style={globalStyles.title}>Lista de jogos desejados</Text>
 
         <LoadableContainer isLoading={loading}>
           <View style={style.buttonContainer}>
@@ -44,7 +44,7 @@ export default function index() {
                 }
               />
             )}
-            style={{ width: "100%", marginTop: 20 }}
+            style={{ width: "100%", marginTop: 20, maxHeight: 650 }}
           />
         </LoadableContainer>
     </View>

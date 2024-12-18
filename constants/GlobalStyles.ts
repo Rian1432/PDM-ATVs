@@ -40,7 +40,7 @@ const globalStyles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 20,
     textAlign: 'center',
-    color: THEME_COLORS.TEXT_COLOR,
+    color: THEME_COLORS.GRAY_COLOR,
   },
   input: {
     height: 32,
